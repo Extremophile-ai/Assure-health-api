@@ -39,11 +39,8 @@ jobs:
 
       run: node src/models/index
       env:
-        NODE_ENV : test
         TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
-        POSTGRES_HOST: postgres
-        POSTGRES_PORT: 5432
-
+        
     - run: npm run coverage
       env:
         NODE_ENV: test
