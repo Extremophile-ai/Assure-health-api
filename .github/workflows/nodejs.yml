@@ -39,7 +39,6 @@ jobs:
     - name: Connect to PostgreSQL
 
       run: node src/models/index
-      env:
         
     - run: npm run coverage
       env:
