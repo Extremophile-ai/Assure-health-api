@@ -1,0 +1,65 @@
+{
+  "name": "assure-health-api",
+  "version": "1.0.0",
+  "description": "A basic API to interract with the client side",
+  "main": "src/server.js",
+  "scripts": {
+    "clean": "npm rm -rf build && npm run build-babel",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/server.js",
+    "test": "cross-env NODE_ENV=test && npm run migration && nyc --require --reporter=html --reporter=text mocha -r @babel/register ./src/tests/index.js --timeout 10000 --recursive --exit || true",
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov --reporter=lcov | node ./node_modules/coveralls/bin/coveralls.js --verbose",
+    "lint": "eslint src/  --fix",
+    "migration": "npm run migrate:undo && npm run migrate",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "seeder": "npm run seed:undo && npm run seed",
+    "seed": "node_modules/.bin/sequelize db:seed:all",
+    "seed:undo": "node_modules/.bin/sequelize db:seed:undo:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Extremophile-ai/Assure-health-api.git"
+  },
+  "author": "Godspower Uche",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Extremophile-ai/Assure-health-api/issues"
+  },
+  "homepage": "https://github.com/Extremophile-ai/Assure-health-api#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.6",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.1.0",
+    "mocha": "^8.2.1",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^2.0.6",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.0",
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
+  }
+}
