@@ -40,7 +40,7 @@ jobs:
 
       run: node src/models/index
       env:
-        TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
         
     - run: npm run coverage
       env:
