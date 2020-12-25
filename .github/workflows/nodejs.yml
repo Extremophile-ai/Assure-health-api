@@ -18,7 +18,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: test_db
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,14 +39,14 @@ jobs:
 
       run: node src/models/index
       env:
-        TEST_DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
+        TEST_DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test_db
         POSTGRES_HOST: postgres
         POSTGRES_PORT: 5432
 
     - run: npm run coverage
       env:
         NODE_ENV: test
-        TEST_DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
+        TEST_DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test_db
         JWT_KEY: ${{ secrets.JWT_KEY }}
       
     - name: Coveralls
