@@ -46,7 +46,7 @@ jobs:
     - run: npm run coverage
       env:
         NODE_ENV: test
-        TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+        TEST_DATABASE_URL: postgresql://postgres:postgres@postgres:5432/test
         JWT_KEY: ${{ secrets.JWT_KEY }}
       
     - name: Coveralls
