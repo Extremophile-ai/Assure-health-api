@@ -38,7 +38,11 @@ jobs:
     - name: Connect to PostgreSQL
 
       run: node src/models/index
-        
+      env:
+        TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+        POSTGRES_HOST: postgres
+        POSTGRES_PORT: 5432
+
     - run: npm run coverage
       env:
         NODE_ENV: test
